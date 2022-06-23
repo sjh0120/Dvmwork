@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+  boot5:
+    #image: boot5:v2
+    build: .
+    networks:
+      - mynet
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysqldb
+
+
+  mysqldb:
+    image: mysql
+    ports:
+      - 33006:3306
+    networks:
+      - mynet
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql
+    volumes:
+      - empdb=/var/lib/mysql
+
+volumes:
+  empdb:
+networks:
+  mynet:

@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  boot5:
+    image: bit01class/boot06:v1
+    # build: .
+    ports:
+      - 8080:8080
+    command: sh -c "java -jar /data/boot06-0.0.1-SNAPSHOT.jar --spring.profiles.active=dev"
+    networks:
+      - mynet
+    depends_on:
+      - mysqlDB
+
+  mysqlDB:
+    image: mysql
+    ports:
+      - 33006:3306
+    networks:
+      - mynet
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql
+    volumes:
+      - sampleDB:/var/lib/mysql
+
+volumes:
+  sampleDB:
+    external: true
+
+networks:
+  mynet: 

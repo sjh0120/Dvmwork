@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  mysqldb:
+    image: mysql 
+    ports:
+       - 33006:3306
+    volumes:
+      - empdb:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql
+volumes:
+  empdb:
